@@ -1,0 +1,88 @@
+<!--div ng-repeat="result in results track by $index" class="result">
+{{result}}
+  <h4>
+    <a ui-sref="root.view({uri: result.uri})">{{ result.label || result.uri }}</a>
+  </h4>
+  <div class="matches">
+    <div class="match" ng-repeat="match in result.matches track by $index">
+      <em ng-repeat="text in match['match-text'] track by $index">
+        <span ng-class="{ highlight: !!text.highlight }">{{ text.highlight || text }}</span>
+      </em>
+    </div>
+  </div>
+  <hr>
+</div-->
+
+<div ng-repeat="result in results track by $index" class="col-md-6">
+	<div class="panel panel-default">
+		<div class="panel-heading" style="text-align:start;font-style:bold;padding: 1px 15px">
+			<h3><a ui-sref="root.view({uri: result.uri})">
+				<div ng-if="result.country_name">
+					{{ result.country_name }}
+				</div>
+				<div ng-if="!result.country_name">
+					{{ result.uri }}
+				</div>
+			</a></h3>
+
+		</div>
+		<div class="panel-body" style="min-height:1px;padding:2px">
+			<table class="table table-condensed table-bordered">
+				<thead>
+					<tr>
+						<th>Sub Region</th>
+						<th>Armed Forced</th>
+						<th>Land Power</th>
+						<th>Air Power</th>
+						<th>Sea Power</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+						  <a ui-sref="root.search({q: result.sub_region})">
+							<div ng-if="result.sub_region.indexOf('Asia') > -1">
+								<div class="btn btn-warning btn-sm">{{ result.sub_region }}</div>
+							</div>
+							<div ng-if="result.sub_region.indexOf('Europe') > -1">
+								<div class="btn btn-primary btn-sm">{{ result.sub_region }}</div>
+							</div>
+							<div ng-if="result.sub_region.indexOf('Africa') > -1">
+								<div class="btn btn-success btn-sm">{{ result.sub_region }}</div>
+							</div>
+							<div ng-if="result.sub_region.indexOf('America') > -1">
+								<div class="btn btn-danger btn-sm">{{ result.sub_region }}</div>
+							</div>
+							<div ng-if="result.sub_region.indexOf('Oceania') > -1">
+								<div class="btn btn-default btn-sm">{{ result.sub_region }}</div>
+							</div>
+						  </a>
+							<!--div ng-switch="result.sub_region">
+							  <a ui-sref="root.search({q: result.sub_region})"><div class="btn btn-primary btn-sm" ng-switch-when="Standard Class">{{ result.sub_region }}</div></a>
+							  <a ui-sref="root.search({q: result.sub_region})"><div class="btn btn-success btn-sm" ng-switch-when="Silver Class">{{ result.sub_region }}</div></a>
+							  <a ui-sref="root.search({q: result.sub_region})"><div class="btn btn-warning btn-sm" ng-switch-when="Gold Class">{{ result.sub_region }}</div></a>
+							  <a ui-sref="root.search({q: result.sub_region})"><div class="btn btn-danger btn-sm" ng-switch-when="Platinum Class">{{ result.sub_region }}</div></a>
+							  <a ui-sref="root.search({q: result.sub_region})"><div class="btn btn-default btn-sm" ng-switch-default>{{ result.sub_region }}</div></a>
+							</div-->
+
+						</td>
+						<td>{{ result.afName }}</td>
+						<td>{{ result.landPower }}</td>
+						<td>{{ result.airPower }}</td>
+						<td>{{ result.seaPower }}</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div class="matches">
+				<div class="match" ng-repeat="match in result.matches track by $index">
+					<em ng-repeat="text in match['match-text'] track by $index">
+						<span ng-class="{ highlight: !!text.highlight }">{{ text.highlight || text}}</span>
+					</em>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+	
